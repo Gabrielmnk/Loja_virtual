@@ -41,6 +41,20 @@ $conn->query('SET GLOBAL lc_time_names = pt_BR');
 $conn->query('SET lc_time_names = pt_BR');
 
 
+// Se o cookie do usuário existe (usuário logado)...
+if (isset($_COOKIE["cookie"])) :
+
+    // Gera array com dados do usuário, convertendo JSON em array ($user[]):
+    $user = json_decode($_COOKIE["cookie"], true);
+
+// Se o cookie não existe (ninguém está logado)...
+else :
+
+    // Dados do usuário não exitem:
+    $user = false;
+
+endif;
+
 
 $rgpass = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{7,25}$/";
 
@@ -71,4 +85,14 @@ function post_clean($post_field, $type = 'string')
 
     // Retorna valor do campo sanitizado
     return $post_value;
+}
+
+
+function debug($element, $pre = true, $stop = true)
+{
+    if ($pre) echo '<pre>';
+    print_r($element);
+    // var_dump($element);
+    if ($pre) echo '</pre>';
+    if ($stop) exit;
 }

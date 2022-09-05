@@ -13,7 +13,7 @@ CREATE TABLE users (
     user_password VARCHAR(255) NOT NULL,
     user_birth DATE NOT NULL,
     user_bio TEXT,
-    user_type ENUM('admin', 'author', 'moderator', 'user') DEFAULT 'user',
+    user_type ENUM('admin','user') DEFAULT 'user',
     user_status ENUM('on', 'off', 'deleted') DEFAULT 'on'
 );
 
@@ -57,21 +57,21 @@ INSERT INTO users (
     SHA1('12345_Qwerty'),
     '1998-02-27',
     'Especialista, modelista, arquivista e cientista.',
-    'author'
+    'user'
 ), (
     'Setembrino Trocatapas',
     'set@tapas.net',
     SHA1('12345_Qwerty'),
     '1982-12-01',
     'Especialista em caçar o Patolino.',
-    'author'
+    'user'
 ), (
     'Hermenegilda Sanguesuga',
     'hernema@sangue.suga',
     SHA1('12345_Qwerty'),
     '2002-03-03',
     'Formada em controle de pragas transdimensionais.',
-    'author'
+    'user'
 ), (
     'Josyswaldo Penalha',
     'josy@waldinho.atc',

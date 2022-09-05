@@ -3,8 +3,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/_config.php');
 
 
 //Titulo da página\
-$page_title = "Login/Entrar";
-
+$page_title = "Login / Entrar";
 
 
 //action do form
@@ -13,6 +12,13 @@ $action = htmlspecialchars($_SERVER["PHP_SELF"]);
 //Variável de conteúdo
 $page_content = "";
 
+// Se o usuário já está logado, envia ele para o perfil:
+if ($user) header('Location: /');
+
+// Inicializa variáveis:
+$email = '';
+$password = '';
+$logged = '';
 
 //Template do Formulário
 $html_form = <<<HTML
@@ -36,7 +42,7 @@ $html_form = <<<HTML
                             <label for="chkLembrar" class="form-check-label">Lembrar de mim</label>
                         </div>
 
-                        <button type="submit" class="btn btn-lg text-white" style="background-color: #8B4513;">Entrar</button>
+                        <button type="submit" class="btn btn-lg bg-dark text-white">Entrar</button>
 
                         <p class="mt-3">
                             Ainda não é cadastrado? <a href="/cadastro.html">Clique aqui</a> para se cadastrar.
@@ -124,13 +130,45 @@ SQL;
   <p>Por favor, preencha todos os campos e tente novamente.</P>
 </div>
 
-
 {$html_form}
 
 HTML;
 
+        // Achei o usuário....
         else :
-            echo '<p>oi</p>';
+
+            // Extrai dados do usuário e armazena em $ck_user[]:
+            $ck_user = $res->fetch_assoc();
+
+            // Dados que vão para o cookie ficam em $ck:
+            $ck = array(
+                'id' => $ck_user['user_id'],
+                'name' => $ck_user['user_name'],
+                'email' => $ck_user['user_email'],
+                'type' => $ck_user['user_type']
+            );
+
+            // Se marcou para manter logado...
+            if ($logged == 'true') :
+
+                // Gera cookie de 90 dias:
+                $ck_validate = time() + (86400 * 90);
+
+            // Se não marcou para manter logado...
+            else :
+
+                // Gera cookie de sessão:
+                $ck_validate = 0;
+
+            endif;
+
+            // Gera cookie do usuário:
+            setcookie("cookie", json_encode($ck), $ck_validate, '/');
+
+            // Extrai o primeiro nome do usuário:
+            $fst = explode(' ', $ck_user['user_name'])[0];
+
+            header('location: /');
 
         endif;
 
