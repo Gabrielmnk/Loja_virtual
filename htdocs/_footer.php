@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row py-3">
             <div class="col-12 col-md-4 text-center">
-                &copy; 2020 - Quitanda Online Ltda ME<br>
-                Rua Virtual Inexistente, 171, Compulândia/PC <br>
+                &copy; 2022 - Sem Nome LTDA<br>
+                Rua 999 999 999<br>
                 CPNJ 99.999.999/0001-99
             </div>
             <div class="col-12 col-md-4 text-center">

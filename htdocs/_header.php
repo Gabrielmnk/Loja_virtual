@@ -74,7 +74,7 @@ endif;
                             // Se não tem usuário logado...
                             else :
                             ?> <li class="nav-item">
-                                    <a href="/cadastro.html" class="nav-link text-white">Cadastre-se</a>
+                                    <a href="/register" class="nav-link text-white">Cadastre-se</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/login" class="nav-link text-white">Entrar</a>

@@ -21,12 +21,28 @@ $site_slogan = "Compra & Vaza";
 $site_logo = "../img/logo/logo.png";
 
 
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$database = "quitanda";
+/********************************
+ * Conexão com o banco de dados *
+ ********************************/
 
-$conn = new mysqli($hostname, $username, $password, $database);
+// Lê arquivo "ini" e converte em um array:
+$db = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/_config.ini', true);
+
+// Itera elementos de $db:
+// Referências: https://www.php.net/manual/pt_BR/control-structures.foreach.php
+foreach ($db as $server => $values) :
+
+    // Se estamos no servidor correto:
+    if ($server == $_SERVER['SERVER_NAME']) :
+
+        // Conecta no banco de dados com as credenciais deste servidor:
+        $conn = new mysqli($values['hostname'], $values['username'], $values['password'], $values['database']);
+
+        // Trata possíveis exceções:
+        if ($conn->connect_error) die("Falha de conexão com o banco e dados: " . $conn->connect_error);
+
+    endif;
+endforeach;
 
 if ($conn->connect_error) die("Falha de conexão com o banco e dados: " . $conn->connect_error);
 
