@@ -56,10 +56,22 @@ endif;
                             if ($user_type == 'user') :
                             ?>
                                 <li class="nav-item">
-                                    <a href="/" class="nav-link text-white"><b><?php echo $user['name'] ?></b></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/logout" class="nav-link text-white">Sair</a>
+
+                                    <!-- Example split danger button -->
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-dark"><?php echo $user['name'] ?></button>
+                                        <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span class="visually-hidden">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                            <li><a class="dropdown-item" href="#">Meus Pedidos</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item" href="/logout">Sair</a></li>
+                                        </ul>
+                                    </div>
                                 </li>
                             <?php
                             // se o usuário for um admin...

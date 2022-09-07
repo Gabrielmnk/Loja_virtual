@@ -115,7 +115,6 @@ AND user_password = SHA1('{$password}')
 AND user_status = 'on'
 
 SQL;
-
         // Executa a query
         $res = $conn->query($sql);
 
